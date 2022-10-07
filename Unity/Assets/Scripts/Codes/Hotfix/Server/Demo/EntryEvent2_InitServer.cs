@@ -20,6 +20,11 @@ namespace ET.Server
             Root.Instance.Scene.AddComponent<NavmeshComponent>();
 
             StartProcessConfig processConfig = StartProcessConfigCategory.Instance.Get(Options.Instance.Process);
+
+            Computer computer = scene.AddChild<Computer>();
+            computer.AddComponent<PCCaseComponent>();
+            computer.Start();
+
             switch (Options.Instance.AppType)
             {
                 case AppType.Server:
