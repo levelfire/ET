@@ -7,11 +7,17 @@
 		{
 			await UIHelper.Create(scene, UIType.UILogin, UILayer.Mid);
 
-			Computer computer = scene.AddChild<Computer>();
-            computer.AddComponent<PCCaseComponent>();
-			computer.Start();
-
-
+            Test(scene).Coroutine();
         }
-	}
+
+        public async ETTask Test(Scene zoneScene)
+        {
+            Computer computer = zoneScene.AddChild<Computer>();
+            computer.AddComponent<PCCaseComponent>();
+            computer.Start();
+
+            await TimerComponent.Instance.WaitAsync(3000);
+            computer.Dispose();
+        }
+    }
 }

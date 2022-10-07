@@ -24,6 +24,7 @@ namespace ET.Server
             Computer computer = scene.AddChild<Computer>();
             computer.AddComponent<PCCaseComponent>();
             computer.Start();
+            computer.Dispose();
 
             switch (Options.Instance.AppType)
             {
