@@ -30,6 +30,8 @@
         {
             Log.Debug("Computer Start!!!!");
             self.GetComponent<PCCaseComponent>().StartPower();
+
+            self.DomainZone();
         }
     }
 }
