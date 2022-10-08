@@ -86,6 +86,9 @@ namespace ET
 		/// <summary>身高</summary>
 		[ProtoMember(5)]
 		public int Height { get; set; }
+		/// <summary>测试</summary>
+		[ProtoMember(7)]
+		public int TestField { get; set; }
 
 	}
 }

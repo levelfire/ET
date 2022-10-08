@@ -34,5 +34,15 @@
         {
             public Unit Unit;
         }
+
+        public struct InstallComputer
+        {
+            public Computer Computer;
+        }
+
+        public struct InstallComputerAsync
+        {
+            public Computer Computer;
+        }
     }
 }

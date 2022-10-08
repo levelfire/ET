@@ -32,6 +32,7 @@
             self.GetComponent<PCCaseComponent>().StartPower();
 
             self.DomainZone();
+            //self.Domain;
         }
     }
 }

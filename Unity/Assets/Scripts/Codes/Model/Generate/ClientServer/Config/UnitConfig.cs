@@ -89,6 +89,9 @@ namespace ET
 		/// <summary>体重</summary>
 		[ProtoMember(6)]
 		public int Weight { get; set; }
+		/// <summary>测试</summary>
+		[ProtoMember(7)]
+		public int TestField { get; set; }
 
 	}
 }
