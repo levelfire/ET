@@ -186,6 +186,15 @@
         "com.unity.shadergraph": "12.1.7"
       }
     },
+    "com.unity.rendering.hybrid": {
+      "version": "0.51.1-preview.21",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.entities": "0.51.1-preview.21"
+      },
+      "url": "https://packages.unity.cn"
+    },
     "com.unity.roslyn": {
       "version": "0.2.2-preview",
       "depth": 2,
