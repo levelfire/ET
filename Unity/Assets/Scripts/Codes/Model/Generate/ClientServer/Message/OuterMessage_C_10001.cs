@@ -479,6 +479,52 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2C_LoginAccount))]
+	[Message(OuterMessage.C2A_LoginAccount)]
+	[ProtoContract]
+	public partial class C2A_LoginAccount: ProtoObject, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string AccountName { get; set; }
+
+		[ProtoMember(2)]
+		public string Password { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_LoginAccount)]
+	[ProtoContract]
+	public partial class A2C_LoginAccount: ProtoObject, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public string Token { get; set; }
+
+		[ProtoMember(2)]
+		public long AccountId { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_Disconnect)]
+	[ProtoContract]
+	public partial class A2C_Disconnect: ProtoObject, IMessage
+	{
+		[ProtoMember(1)]
+		public int Error { get; set; }
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -515,5 +561,8 @@ namespace ET
 		 public const ushort M2C_TransferMap = 10033;
 		 public const ushort C2G_Benchmark = 10034;
 		 public const ushort G2C_Benchmark = 10035;
+		 public const ushort C2A_LoginAccount = 10036;
+		 public const ushort A2C_LoginAccount = 10037;
+		 public const ushort A2C_Disconnect = 10038;
 	}
 }

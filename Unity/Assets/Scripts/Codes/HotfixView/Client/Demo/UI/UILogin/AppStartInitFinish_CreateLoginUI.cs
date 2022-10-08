@@ -15,11 +15,11 @@ namespace ET.Client
         public async ETTask Test(Scene zoneScene)
         {
             Computer computer = zoneScene.AddChild<Computer>();
-            EventSystem.Instance.Publish(zoneScene,new EventType.InstallComputer() { Computer = computer });
+            EventSystem.Instance.Publish(zoneScene, new EventType.InstallComputer() { Computer = computer });
             //EventSystem.Instance.PublishAsync(zoneScene, new EventType.InstallComputerAsync() { Computer = computer }).Coroutine();
             //Game.EventSystem.Publish(new EventType.InstallComputer() { Computer = computer });
 
-            
+
 
             //computer.AddComponent<PCCaseComponent>();
             //computer.Start();

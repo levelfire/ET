@@ -47,6 +47,12 @@ namespace ET.Server
                 case SceneType.BenchmarkClient:
                     scene.AddComponent<BenchmarkClientComponent>();
                     break;
+                case SceneType.Account:
+                    scene.AddComponent<NetServerComponent, IPEndPoint>(startSceneConfig.InnerIPOutPort);
+                    //scene.AddComponent<DBManagerComponent>();
+                    scene.AddComponent<TokenComponent>();
+                    scene.AddComponent<AccountSessionsComponent>();
+                    break;
             }
 
             return scene;

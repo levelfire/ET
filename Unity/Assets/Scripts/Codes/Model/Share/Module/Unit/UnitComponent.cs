@@ -1,4 +1,6 @@
-﻿namespace ET
+﻿using System.Collections.Generic;
+
+namespace ET
 {
 	
 	[ComponentOf(typeof(Scene))]
