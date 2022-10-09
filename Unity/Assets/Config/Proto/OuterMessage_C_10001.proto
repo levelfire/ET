@@ -257,3 +257,24 @@ message A2C_Disconnect // IMessage
 {
 	int32 Error = 1;	
 }
+
+//ResponseType A2C_MatchingApply
+message C2A_MatchingApply // IRequest
+{
+	int32 RpcId = 90;
+}
+
+message A2C_MatchingApply // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	
+}
+
+message A2C_MatchingResult // IMessage
+{
+	int32 Error = 1;
+	string Ip = 2;
+	int32 port = 3;	
+}

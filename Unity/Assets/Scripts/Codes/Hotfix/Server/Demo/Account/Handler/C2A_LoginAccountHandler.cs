@@ -94,6 +94,7 @@ namespace ET.Server
                     otherSession?.Disconnect().Coroutine();
                     session.DomainScene().GetComponent<AccountSessionsComponent>().Add(account.Id,session.InstanceId);
                     session.DomainScene().GetComponent<MatchingComponent>().Add(account.Id, session.InstanceId);
+                    session.DomainScene().GetComponent<MatchingComponent>().AddAccount(account.Id, session.InstanceId);
                     session.AddComponent<AccountCheckOutTimeComponent, long>(account.Id);
 
                     string Token = TimeHelper.ServerNow().ToString()

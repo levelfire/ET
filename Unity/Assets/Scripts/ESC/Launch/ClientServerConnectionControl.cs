@@ -29,6 +29,17 @@ public partial class ServerConnectionControl : SystemBase
         var serverData = EntityManager.GetComponentData<ServerDataComponent>(serverDataEntity);
         m_GamePort = serverData.GamePort;
 
+        string[] CommandLineArgs = Environment.GetCommandLineArgs();
+        for (int i = 0; i < CommandLineArgs.Length; i++)
+        {
+            Debug.Log("CommandLineArgs: " + i + ":" + CommandLineArgs[i]);
+        }
+        if (CommandLineArgs.Length >= 4)
+        {
+            //s_address = CommandLineArgs[1];
+            m_GamePort = Convert.ToUInt16(CommandLineArgs[3]);
+        }
+
         EntityManager.DestroyEntity(GetSingletonEntity<InitializeServerComponent>());
 
         var grid = EntityManager.CreateEntity();
@@ -67,6 +78,12 @@ public partial class ClientConnectionControl : SystemBase
         m_ConnectToServerIp = clientData.ConnectToServerIp.ToString();
         m_GamePort = clientData.GamePort;
 
+        var battlePort = System.Environment.GetEnvironmentVariable("BattlePort");
+        if (!string.IsNullOrEmpty(battlePort))
+        {
+            m_GamePort =  Convert.ToUInt16(battlePort);
+        }
+            
         EntityManager.DestroyEntity(GetSingletonEntity<InitializeClientComponent>());
 
         NetworkEndPoint ep = NetworkEndPoint.Parse(m_ConnectToServerIp, m_GamePort);

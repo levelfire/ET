@@ -22,8 +22,11 @@ namespace ET.Client
         {
             //await EnterMapHelper.EnterMapAsync(self.ClientScene());
             await UIHelper.Remove(self.ClientScene(), UIType.UILobby);
+            //await MatchingHelper.MatchingApply(self.ClientScene());
             await UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LocalScene");
             //await ETTask.CompletedTask;
+
+            
         }
     }
 }

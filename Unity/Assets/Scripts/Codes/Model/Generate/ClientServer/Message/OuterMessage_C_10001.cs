@@ -525,6 +525,46 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2C_MatchingApply))]
+	[Message(OuterMessage.C2A_MatchingApply)]
+	[ProtoContract]
+	public partial class C2A_MatchingApply: ProtoObject, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_MatchingApply)]
+	[ProtoContract]
+	public partial class A2C_MatchingApply: ProtoObject, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_MatchingResult)]
+	[ProtoContract]
+	public partial class A2C_MatchingResult: ProtoObject, IMessage
+	{
+		[ProtoMember(1)]
+		public int Error { get; set; }
+
+		[ProtoMember(2)]
+		public string Ip { get; set; }
+
+		[ProtoMember(3)]
+		public int port { get; set; }
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -564,5 +604,8 @@ namespace ET
 		 public const ushort C2A_LoginAccount = 10036;
 		 public const ushort A2C_LoginAccount = 10037;
 		 public const ushort A2C_Disconnect = 10038;
+		 public const ushort C2A_MatchingApply = 10039;
+		 public const ushort A2C_MatchingApply = 10040;
+		 public const ushort A2C_MatchingResult = 10041;
 	}
 }
