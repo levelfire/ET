@@ -20,8 +20,10 @@ namespace ET.Client
         
         public static async ETTask EnterMap(this UILobbyComponent self)
         {
-            await EnterMapHelper.EnterMapAsync(self.ClientScene());
+            //await EnterMapHelper.EnterMapAsync(self.ClientScene());
             await UIHelper.Remove(self.ClientScene(), UIType.UILobby);
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LocalScene");
+            //await ETTask.CompletedTask;
         }
     }
 }

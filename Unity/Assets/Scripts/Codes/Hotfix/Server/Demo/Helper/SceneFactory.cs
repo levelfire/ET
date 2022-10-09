@@ -52,6 +52,7 @@ namespace ET.Server
                     //scene.AddComponent<DBManagerComponent>();
                     scene.AddComponent<TokenComponent>();
                     scene.AddComponent<AccountSessionsComponent>();
+                    scene.AddComponent<MatchingComponent>();
                     break;
             }
 

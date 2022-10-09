@@ -1,6 +1,6 @@
 {"list":[
-{"_t":"StartZoneConfig","_id":1,"DBConnection":"mongodb://docker:mongopw@localhost:49153","DBName":"ET1"},
+{"_t":"StartZoneConfig","_id":1,"DBConnection":"mongodb://127.0.0.1","DBName":"ET1"},
 {"_t":"StartZoneConfig","_id":2,"DBConnection":"mongodb://127.0.0.1","DBName":""},
 {"_t":"StartZoneConfig","_id":3,"DBConnection":"","DBName":""},
-{"_t":"StartZoneConfig","_id":4,"DBConnection":"mongodb://docker:mongopw@localhost:49153","DBName":"ET_D"},
+{"_t":"StartZoneConfig","_id":4,"DBConnection":"mongodb://127.0.0.1","DBName":"ET_D"},
 ]}

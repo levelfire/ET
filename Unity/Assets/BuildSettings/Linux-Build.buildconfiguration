@@ -1,0 +1,42 @@
+{
+    "Show": true,
+    "Dependencies": [
+        "GlobalObjectId_V1-1-f7ce9856746b256459ad63eb66578796-93214019566545601-0"
+    ],
+    "Components": [
+        {
+            "$type": "Unity.Build.Classic.ClassicBuildProfile, Unity.Build.Classic",
+            "$version": 1,
+            "Platform": "StandaloneLinux64",
+            "Configuration": 3
+        },
+        {
+            "$type": "Unity.Build.Common.SceneList, Unity.Build",
+            "$version": 1,
+            "BuildCurrentScene": false,
+            "SceneInfos": [
+                {
+                    "Scene": "GlobalObjectId_V1-1-335cc4dcc083f3146baef2add9f6d11c-102900000-0",
+                    "AutoLoad": false
+                },
+                {
+                    "Scene": "GlobalObjectId_V1-1-99c9720ab356a0642a771bea13969a05-102900000-0",
+                    "AutoLoad": false
+                }
+            ]
+        },
+        {
+            "$type": "Unity.Build.Common.GeneralSettings, Unity.Build",
+            "ProductName": "dots_3d_urp_server",
+            "CompanyName": "DefaultCompany",
+            "Version": "1.0.0"
+        },
+        {
+            "$type": "Unity.Build.Classic.EnableHeadlessMode, Unity.Build.Classic"
+        },
+        {
+            "$type": "Unity.Build.Common.OutputBuildDirectory, Unity.Build",
+            "OutputDirectory": "..\\temp\\Builds\\Linux\\093001"
+        }
+    ]
+}

@@ -88,6 +88,9 @@ namespace ET.Client
             clientScene.GetComponent<AccountInfoComponent>().Token = a2C_LoginAccount.Token;
             clientScene.GetComponent<AccountInfoComponent>().AccountId = a2C_LoginAccount.AccountId;
 
+            Log.Debug("登陆gate成功!");
+            await EventSystem.Instance.PublishAsync(clientScene, new EventType.LoginFinish());
+
             return ErrorCode.ERR_Success;
         }
     }
