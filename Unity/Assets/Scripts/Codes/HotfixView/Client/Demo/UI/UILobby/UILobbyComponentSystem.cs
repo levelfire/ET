@@ -22,7 +22,7 @@ namespace ET.Client
         {
             //await EnterMapHelper.EnterMapAsync(self.ClientScene());
             await UIHelper.Remove(self.ClientScene(), UIType.UILobby);
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LocalScene");
+            await UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LocalScene");
             //await ETTask.CompletedTask;
         }
     }

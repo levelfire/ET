@@ -35,6 +35,7 @@ namespace ET.Client
             //{
             //    Log.Debug("list:" +  e.Name);
             //}
+            await ETTask.CompletedTask;
         }
     }
 }
