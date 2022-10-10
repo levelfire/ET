@@ -19,6 +19,9 @@ namespace ET.Server
             session.DomainScene().GetComponent<MatchingComponent>().Add(accountId, session.InstanceId);
             session.DomainScene().GetComponent<MatchingComponent>().AddAccount(accountId, session.InstanceId);
 
+            response.Error = ErrorCode.ERR_Success;
+            reply();
+
             await ETTask.CompletedTask;
         }
     }

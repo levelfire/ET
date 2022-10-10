@@ -8,6 +8,8 @@ namespace ET
         {
             Log.Debug($"A2C_MatchingResult port {message.Port} ");
             System.Environment.SetEnvironmentVariable("BattlePort", message.Port.ToString());
+
+            await EventSystem.Instance.PublishAsync(session.DomainScene(), new EventType.MatchingSuccess());
             await ETTask.CompletedTask;
         }
     }

@@ -86,7 +86,8 @@ namespace ET.Client
                 return a2C_LoginAccount.Error;
             }
 
-            clientScene.AddComponent<SessionComponent>().Session = accountSession;
+            clientScene.AddComponent<SessionComponent>();
+            clientScene.GetComponent<SessionComponent>().Session = accountSession;
             //clientScene.GetComponent<SessionComponent>().Session.AddComponent<PingComponent>();
 
             clientScene.GetComponent<AccountInfoComponent>().Token = a2C_LoginAccount.Token;

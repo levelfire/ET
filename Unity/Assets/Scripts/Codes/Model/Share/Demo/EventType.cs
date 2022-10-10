@@ -44,5 +44,9 @@
         {
             public Computer Computer;
         }
+
+        public struct MatchingSuccess
+        { 
+        }
     }
 }
