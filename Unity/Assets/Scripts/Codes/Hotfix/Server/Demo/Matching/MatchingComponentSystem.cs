@@ -24,10 +24,16 @@ namespace ET
             {
                 self.Ts += 5;
                 Log.Debug($"Matching TryDequeue {self.Ts}");
-                if (self.matchingUnits.TryDequeue(out var unit))
+                bool match = false;
+                while (self.matchingUnits.TryDequeue(out var unit))
                 {
                     Log.Debug($"Matching unit{unit}");
-                    StartBattle(unit.Item2, self.Port++,self.Ip).Coroutine();
+                    StartBattle(unit.Item2, self.Port,self.Ip).Coroutine();
+                    match = true;
+                }
+                if (match)
+                {
+                    self.Port++;
                     if (self.Port >= self.PortMax)
                     {
                         self.Port = self.PortMin;
