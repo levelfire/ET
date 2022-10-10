@@ -30,14 +30,22 @@ public partial class ServerConnectionControl : SystemBase
         m_GamePort = serverData.GamePort;
 
         string[] CommandLineArgs = Environment.GetCommandLineArgs();
-        for (int i = 0; i < CommandLineArgs.Length; i++)
+        if (CommandLineArgs != null 
+            && CommandLineArgs.Length > 0 
+            && !string.IsNullOrEmpty(CommandLineArgs[0])
+            && CommandLineArgs[0] == "ServerBattle")
         {
-            Debug.Log("CommandLineArgs: " + i + ":" + CommandLineArgs[i]);
-        }
-        if (CommandLineArgs.Length >= 4)
-        {
-            //s_address = CommandLineArgs[1];
-            m_GamePort = Convert.ToUInt16(CommandLineArgs[3]);
+            Debug.Log($"has CommandLineArgs {CommandLineArgs.Length}");
+            for (int i = 0; i < CommandLineArgs.Length; i++)
+            {
+                //Debug.Log("CommandLineArgs: " + i + ":" + CommandLineArgs[i]);
+                Debug.Log($"CommandLineArgs: {i} : {CommandLineArgs[i]}");
+            }
+            if (CommandLineArgs.Length >= 4)
+            {
+                //s_address = CommandLineArgs[1];
+                m_GamePort = Convert.ToUInt16(CommandLineArgs[3]);
+            }
         }
 
         EntityManager.DestroyEntity(GetSingletonEntity<InitializeServerComponent>());

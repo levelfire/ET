@@ -561,7 +561,7 @@ namespace ET
 		public string Ip { get; set; }
 
 		[ProtoMember(3)]
-		public int port { get; set; }
+		public int Port { get; set; }
 
 	}
 
