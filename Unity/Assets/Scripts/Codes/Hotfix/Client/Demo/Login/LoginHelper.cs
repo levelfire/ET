@@ -69,6 +69,8 @@ namespace ET.Client
                 var address1 =  new IPEndPoint(ipAddress, 10005);
                 //accountSession = clientScene.GetComponent<NetClientComponent>().Create(NetworkHelper.ToIPEndPoint(address));
                 accountSession = await RouterHelper.CreateRouterSession(clientScene, address1);
+                //clientScene.AddComponent<SessionComponent>().Session = accountSession;
+                password = MD5Helper.StringMD5(password);
                 a2C_LoginAccount
                     = (A2C_LoginAccount)await accountSession.Call(new C2A_LoginAccount { AccountName = account, Password = password });
             }
@@ -85,10 +87,12 @@ namespace ET.Client
             }
 
             clientScene.AddComponent<SessionComponent>().Session = accountSession;
+            //clientScene.GetComponent<SessionComponent>().Session.AddComponent<PingComponent>();
+
             clientScene.GetComponent<AccountInfoComponent>().Token = a2C_LoginAccount.Token;
             clientScene.GetComponent<AccountInfoComponent>().AccountId = a2C_LoginAccount.AccountId;
 
-            Log.Debug("登陆gate成功!");
+            Log.Debug("登陆Account成功!");
             await EventSystem.Instance.PublishAsync(clientScene, new EventType.LoginFinish());
 
             return ErrorCode.ERR_Success;

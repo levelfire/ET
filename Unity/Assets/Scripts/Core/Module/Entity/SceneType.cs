@@ -18,9 +18,10 @@
 		Benchmark = 12,
 
 		Account = 13,
+        LoginCenter = 14,
 
-		// 客户端Model层
-		Client = 31,
+        // 客户端Model层
+        Client = 31,
 		Current = 34,
 	}
 }

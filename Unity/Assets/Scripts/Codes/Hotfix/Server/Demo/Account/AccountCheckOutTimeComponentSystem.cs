@@ -27,7 +27,8 @@ namespace ET.Server
         {
             self.AccountId = accountId;
             TimerComponent.Instance.Remove(ref self.Timer);
-            self.Timer = TimerComponent.Instance.NewOnceTimer(TimeHelper.ServerNow() + 10 * 60 * 1000, TimerInvokeType.AccountSessionCheckOutTimer, self);
+            //TODO
+            self.Timer = TimerComponent.Instance.NewOnceTimer(TimeHelper.ServerNow() + 100 * 60 * 1000, TimerInvokeType.AccountSessionCheckOutTimer, self);
         }
     }
 
