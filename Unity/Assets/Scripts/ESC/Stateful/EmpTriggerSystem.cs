@@ -1,13 +1,14 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.NetCode;
 using Unity.Physics.Stateful;
 using Unity.Rendering;
 using UnityEngine;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateAfter(typeof(StatefulTriggerEventBufferSystem))]
-public partial class ChangeMaterialAndDestroySystem : SystemBase
+public partial class EmpTriggerSystem : SystemBase
 {
     private EndFixedStepSimulationEntityCommandBufferSystem m_CommandBufferSystem;
 
@@ -34,13 +35,13 @@ public partial class ChangeMaterialAndDestroySystem : SystemBase
         var nonTriggerMask = m_NonTriggerMask;
 
         Entities
-            .WithName("ChangeMaterialOnTriggerEnter")
-            .WithAll<BulletTag>()
+            .WithAll<EmpTag>()
             .WithoutBurst()
             .ForEach((Entity e, ref DynamicBuffer<StatefulTriggerEvent> triggerEventBuffer) =>
             {
                 for (int i = 0; i < triggerEventBuffer.Length; i++)
                 {
+                    Debug.Log($"trigger emp 1");
                     var triggerEvent = triggerEventBuffer[i];
                     var otherEntity = triggerEvent.GetOtherEntity(e);
 
@@ -48,39 +49,33 @@ public partial class ChangeMaterialAndDestroySystem : SystemBase
                     {
                         continue;
                     }
-
-                    if (triggerEvent.State == StatefulEventState.Enter)
+                    Debug.Log($"trigger emp 2");
+                    var hasCom = EntityManager.HasComponent<TankStacksCountComponent>(otherEntity);
+                    if (hasCom)
                     {
-                        var volumeRenderMesh = EntityManager.GetSharedComponentData<RenderMesh>(e);
-                        var overlappingRenderMesh = EntityManager.GetSharedComponentData<RenderMesh>(otherEntity);
-                        overlappingRenderMesh.material = volumeRenderMesh.material;
-
-                        commandBuffer.SetSharedComponent(otherEntity, overlappingRenderMesh);
-
-                        commandBuffer.AddComponent(e, new DestroyTag { });
-                        var hashp = EntityManager.HasComponent<HpComponent>(otherEntity);
-                        if (hashp)
+                        Debug.Log($"trigger emp 3");
+                        var StackCom = EntityManager.GetComponentData<TankStacksCountComponent>(otherEntity);
+                        int newStack = StackCom.EmpStackCount;
+                        if (triggerEvent.State == StatefulEventState.Enter)
                         {
-                            var hpcom = EntityManager.GetComponentData<HpComponent>(otherEntity);
-                            var newhp = hpcom.Value - 1;
-                            if (newhp <= 0)
+                            newStack += 1;
+                            if (newStack == 1 && !EntityManager.HasComponent<EmpDotTag>(otherEntity))
                             {
-                                commandBuffer.AddComponent(otherEntity, new DestroyTag { });
+                                commandBuffer.AddComponent(otherEntity, new EmpDotTag { });
                             }
-                            else
-                            {
-                                commandBuffer.SetComponent(otherEntity, new HpComponent { Value = newhp });
-                            }
+                            Debug.Log($"enter emp {newStack}");
                         }
-                        else
+                        else 
                         {
-                            commandBuffer.AddComponent(otherEntity, new DestroyTag { });
+                            newStack -= 1;
+                            if (newStack == 0 && EntityManager.HasComponent<EmpDotTag>(otherEntity))
+                            {
+                                commandBuffer.RemoveComponent<EmpDotTag>(otherEntity);
+                            }
+                            Debug.Log($"leave emp {newStack}");
                         }
-                    }
-                    else
-                    {
-                        //commandBuffer.AddComponent(otherEntity, new DestroyTag { });
-                    }
+                        commandBuffer.SetComponent(otherEntity, new TankStacksCountComponent { EmpStackCount = newStack });
+                    } 
                 }
             }).Run();
 

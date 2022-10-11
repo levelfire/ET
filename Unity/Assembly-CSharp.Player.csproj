@@ -136,8 +136,19 @@
     <Compile Include="Assets\Scripts\ESC\Stateful\IStatefulSimulationEvent.cs" />
     <Compile Include="Assets\Scripts\ESC\Tags\BlockTag.cs" />
     <Compile Include="Assets\Scripts\ESC\Mixed\Components\PlayerStateAndOffsetComponent.cs" />
+    <Compile Include="Assets\Scripts\ESC\Server\Systems\EmpSpawnSystem.cs" />
+    <Compile Include="Assets\Scripts\ESC\Authoring\EmpAuthoringComponent.cs" />
+    <Compile Include="Assets\Scripts\ESC\Mixed\Components\TankAttrComponent.cs" />
+    <Compile Include="Assets\Scripts\ESC\Tags\EmpTag.cs" />
+    <Compile Include="Assets\Scripts\ESC\Comm\MethHelper.cs" />
+    <Compile Include="Assets\Scripts\ESC\Stateful\EmpTriggerSystem.cs" />
+    <Compile Include="Assets\Scripts\ESC\Tags\EmpDotTag.cs" />
+    <Compile Include="Assets\Scripts\ESC\Mixed\Components\TankStacksCountComponent.cs" />
+    <Compile Include="Assets\Scripts\ESC\Server\Systems\EmpDamageSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Config\Excel\Json\cs\EmpDataConfig.txt" />
+    <None Include="Assets\Config\Excel\Json\s\EmpDataConfig.txt" />
     <None Include="Assets\Config\Excel\Json\cs\StartConfig\RouterTest\StartMachineConfig.txt" />
     <None Include="Assets\Config\Excel\Json\cs\StartConfig\Release\StartSceneConfig.txt" />
     <None Include="Assets\Config\Excel\Json\s\StartConfig\Release\StartProcessConfig.txt" />
@@ -145,6 +156,7 @@
     <None Include="Assets\Config\Excel\Json\s\StartConfig\RouterTest\StartZoneConfig.txt" />
     <None Include="Assets\Config\Excel\Json\cs\StartConfig\Release\StartProcessConfig.txt" />
     <None Include="Assets\Config\Excel\Json\cs\StartConfig\RouterTest\StartZoneConfig.txt" />
+    <None Include="Assets\Config\Excel\Json\c\EmpDataConfig.txt" />
     <None Include="Assets\Config\Excel\Json\s\StartConfig\Release\StartMachineConfig.txt" />
     <None Include="Assets\Config\Excel\Json\cs\StartConfig\Localhost\StartZoneConfig.txt" />
     <None Include="Assets\Config\Excel\Json\s\UnitConfig.txt" />

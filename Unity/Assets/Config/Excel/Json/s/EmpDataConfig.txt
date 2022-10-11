@@ -1,0 +1,14 @@
+{"list":[
+{"_t":"EmpDataConfig","_id":1000,"Round":1,"PreparationTime":"30","WarningTime":"75","CoverTime":75,"CoverMapNum":7,"Damage":3,"ReducedHealPrecent":20},
+{"_t":"EmpDataConfig","_id":1000,"Round":2,"PreparationTime":"0","WarningTime":"60","CoverTime":60,"CoverMapNum":5,"Damage":7,"ReducedHealPrecent":40},
+{"_t":"EmpDataConfig","_id":1000,"Round":3,"PreparationTime":"0","WarningTime":"45","CoverTime":45,"CoverMapNum":3,"Damage":13,"ReducedHealPrecent":60},
+{"_t":"EmpDataConfig","_id":1000,"Round":4,"PreparationTime":"0","WarningTime":"30","CoverTime":30,"CoverMapNum":1,"Damage":20,"ReducedHealPrecent":80},
+{"_t":"EmpDataConfig","_id":1001,"Round":1,"PreparationTime":"30","WarningTime":"75","CoverTime":75,"CoverMapNum":16,"Damage":3,"ReducedHealPrecent":20},
+{"_t":"EmpDataConfig","_id":1001,"Round":2,"PreparationTime":"0","WarningTime":"60","CoverTime":60,"CoverMapNum":12,"Damage":7,"ReducedHealPrecent":40},
+{"_t":"EmpDataConfig","_id":1001,"Round":3,"PreparationTime":"0","WarningTime":"45","CoverTime":45,"CoverMapNum":7,"Damage":13,"ReducedHealPrecent":60},
+{"_t":"EmpDataConfig","_id":1001,"Round":4,"PreparationTime":"0","WarningTime":"30","CoverTime":30,"CoverMapNum":1,"Damage":20,"ReducedHealPrecent":80},
+{"_t":"EmpDataConfig","_id":1002,"Round":1,"PreparationTime":"30","WarningTime":"75","CoverTime":75,"CoverMapNum":38,"Damage":3,"ReducedHealPrecent":20},
+{"_t":"EmpDataConfig","_id":1002,"Round":2,"PreparationTime":"0","WarningTime":"60","CoverTime":60,"CoverMapNum":18,"Damage":7,"ReducedHealPrecent":40},
+{"_t":"EmpDataConfig","_id":1002,"Round":3,"PreparationTime":"0","WarningTime":"45","CoverTime":45,"CoverMapNum":7,"Damage":13,"ReducedHealPrecent":60},
+{"_t":"EmpDataConfig","_id":1002,"Round":4,"PreparationTime":"0","WarningTime":"30","CoverTime":30,"CoverMapNum":1,"Damage":20,"ReducedHealPrecent":80},
+]}

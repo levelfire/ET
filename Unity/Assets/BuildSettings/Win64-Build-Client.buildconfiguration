@@ -18,7 +18,7 @@
         },
         {
             "$type": "Unity.Build.Common.OutputBuildDirectory, Unity.Build",
-            "OutputDirectory": ".\\Builds\\Local\\0930R300"
+            "OutputDirectory": "..\\..\\Builds\\Local\\101001"
         },
         {
             "$type": "Unity.Build.Classic.EnableHeadlessMode, Unity.Build.Classic"
