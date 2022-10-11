@@ -54,9 +54,9 @@ namespace ET.Server
                     scene.AddComponent<AccountSessionsComponent>();
                     scene.AddComponent<MatchingComponent>();
                     break;
-                case SceneType.LoginCenter:
-                    scene.AddComponent<LoginInfoRecordComponent>();
-                    break;
+                //case SceneType.LoginCenter:
+                //    scene.AddComponent<LoginInfoRecordComponent>();
+                //    break;
             }
 
             return scene;

@@ -15,14 +15,14 @@ namespace ET
             await TimerComponent.Instance.WaitAsync(3000);
             computer.Dispose();
 
-            UnitConfig unitconfig = UnitConfigCategory.Instance.Get(1001);
-            Log.Debug(unitconfig.Name);
+            //UnitConfig unitconfig = UnitConfigCategory.Instance.Get(1001);
+            //Log.Debug(unitconfig.Name);
 
-            var configlist = UnitConfigCategory.Instance.GetAll();
-            foreach (var e in configlist.Values)
-            {
-                Log.Debug("list:" + e.Name);
-            }
+            //var configlist = UnitConfigCategory.Instance.GetAll();
+            //foreach (var e in configlist.Values)
+            //{
+            //    Log.Debug("list:" + e.Name);
+            //}
             //throw new System.NotImplementedException();
             //await ETTask.CompletedTask;
             //StartBattle().Coroutine();

@@ -65,7 +65,7 @@ namespace ET.Client
                     clientScene.AddComponent<NetClientComponent, AddressFamily>(routerAddressComponent.RouterManagerIPAddress.AddressFamily);
                 }
 
-                IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+                IPAddress ipAddress = IPAddress.Parse(ConstValue.RouterHttpHost);
                 var address1 =  new IPEndPoint(ipAddress, 10005);
                 //accountSession = clientScene.GetComponent<NetClientComponent>().Create(NetworkHelper.ToIPEndPoint(address));
                 accountSession = await RouterHelper.CreateRouterSession(clientScene, address1);

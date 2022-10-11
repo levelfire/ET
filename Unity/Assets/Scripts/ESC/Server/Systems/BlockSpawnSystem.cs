@@ -26,6 +26,8 @@ public partial class BlockSpawnSystem : SystemBase
 
     private EntityQuery m_ConnectionGroup;
 
+    private long m_Ts;
+
     protected override void OnCreate()
     {
         m_BlockQuery = GetEntityQuery(ComponentType.ReadWrite<BlockTag>());
@@ -39,6 +41,8 @@ public partial class BlockSpawnSystem : SystemBase
         RequireForUpdate(m_GameSettingsQuery);
 
         m_ConnectionGroup = GetEntityQuery(ComponentType.ReadWrite<NetworkStreamConnection>());
+
+        m_Ts = System.DateTimeOffset.Now.ToUnixTimeSeconds() + 60;
     }
 
     protected override void OnUpdate()
@@ -48,6 +52,12 @@ public partial class BlockSpawnSystem : SystemBase
             m_Prefab = GetSingleton<BlockAuthoringComponent>().Prefab;
             m_PrefabWater = GetSingleton<WaterAuthoringComponent>().Prefab;
             m_PrefabGrass = GetSingleton<GrassAuthoringComponent>().Prefab;
+            return;
+        }
+
+        if (System.DateTimeOffset.Now.ToUnixTimeSeconds() >= m_Ts)
+        {
+            Application.Quit();
             return;
         }
 

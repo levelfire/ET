@@ -12,7 +12,7 @@ namespace ET
             self.PortMin = 5001;
             self.PortMax = 5100;
             self.Port = self.PortMin;
-            self.Ip = "127.0.0.1";
+            self.Ip = ConstValue.RouterHttpHost;
         }
     }
 
