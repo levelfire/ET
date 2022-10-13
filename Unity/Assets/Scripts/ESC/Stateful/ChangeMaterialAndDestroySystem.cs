@@ -85,6 +85,7 @@ public partial class ChangeMaterialAndDestroySystem : SystemBase
                                     });
                                     Debug.Log($"Rpc Server Send blockChange {pos}");
                                     commandBuffer.AddComponent(req, new SendRpcCommandRequestComponent());
+                                    commandBuffer.AddComponent(otherEntity, new DestroyTag { });
                                 }
                             }
                         }
