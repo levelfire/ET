@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: -1365003538483078226}
   - component: {fileID: -1767869435127588757}
   - component: {fileID: 2637357823541336703}
-  - component: {fileID: -302881422716482348}
   - component: {fileID: 8368512850192517930}
+  - component: {fileID: 4422830808972005395}
   m_Layer: 0
-  m_Name: Emp
-  m_TagString: Emp
+  m_Name: DropItem
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6084661346466681200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 347df9eb11a20a74c9cf87a2a4fc5718, type: 2}
+  - {fileID: 2100000, guid: 2086b7a5abc8bca44847f9c5e3009735, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
     Axis: 2
   m_CylinderSideCount: 20
   m_SphereRadius: 0.5
-  m_MinimumSkinnedVertexWeight: 0
+  m_MinimumSkinnedVertexWeight: 1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015
     m_BevelRadius: 0
@@ -158,8 +158,8 @@ MonoBehaviour:
         Category04: 0
         Category05: 0
         Category06: 0
-        Category07: 1
-        Category08: 0
+        Category07: 0
+        Category08: 1
         Category09: 0
         Category10: 0
         Category11: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
   SupportedGhostModes: 3
   OptimizationMode: 1
   Importance: 1
-  prefabId: 2c31801d0025fd84fa7d093cf8c8ae87
+  prefabId: 9f71a9d734ece88469d21841624e0608
   Name: Block
   HasOwner: 0
   SupportAutoCommandTarget: 0
@@ -310,18 +310,6 @@ MonoBehaviour:
   SendTypeOverrides: []
   VariantOverrides: []
   SendForChild: []
---- !u!114 &-302881422716482348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6084661346466681200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e14eda804dfb664a8665e8ed3114955, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8368512850192517930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,5 +320,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb631d73ac7a9134dad374ea3f46dc85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4422830808972005395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084661346466681200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6136d80101c309b48997f399b5d7582a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

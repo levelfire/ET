@@ -17,11 +17,13 @@ public partial class TankInputResponseMovementSystem : SystemBase
 {
     private GhostPredictionSystemGroup m_PredictionGroup;
     private BuildPhysicsWorld m_BuildPhysicsWorldSystem;
+    private EndFixedStepSimulationEntityCommandBufferSystem m_EndFixedStepSimECB;
 
     protected override void OnCreate()
     {
         m_PredictionGroup = World.GetOrCreateSystem<GhostPredictionSystemGroup>();
         m_BuildPhysicsWorldSystem = World.GetOrCreateSystem<BuildPhysicsWorld>();
+        m_EndFixedStepSimECB = World.GetOrCreateSystem<EndFixedStepSimulationEntityCommandBufferSystem>();
 
         Entity physicsSingleton = EntityManager.CreateEntity();
         EntityManager.AddComponentData(physicsSingleton, new PredictedPhysicsConfig { PhysicsTicksPerSimTick = 1, DisableWhenNoConnections = true });
@@ -192,6 +194,17 @@ public partial class TankInputResponseMovementSystem : SystemBase
 
         }).Schedule();
         //.ScheduleParallel();
+
+        //var commandBuffer = m_EndFixedStepSimECB.CreateCommandBuffer().AsParallelWriter();
+        //Entities
+        //.WithAll<EmpTag>()
+        //.ForEach((Entity entity, int entityInQueryIndex) =>
+        //{
+        //    var scale = new NonUniformScale { Value = new float3(10, 10, 10) };
+        //    commandBuffer.AddComponent<NonUniformScale>(entityInQueryIndex, entity, scale);
+        //    scale.Value = new float3(10, 10, 10);
+        //    commandBuffer.SetComponent(entityInQueryIndex, entity, scale);
+        //}).ScheduleParallel();
 
         m_BuildPhysicsWorldSystem.AddInputDependencyToComplete(Dependency);
     }

@@ -44,6 +44,16 @@ public partial class EmpDamageSystem : SystemBase
             }
         }).ScheduleParallel();
 
+        //Entities
+        //.WithAll<EmpTag>()
+        //.ForEach((Entity entity, int entityInQueryIndex) =>
+        //{
+        //    var scale = new NonUniformScale { Value = new float3(10, 10, 10) };
+        //    commandBuffer.AddComponent<NonUniformScale>(entityInQueryIndex,entity, scale);
+        //    scale.Value = new float3(10, 10, 10);
+        //    commandBuffer.SetComponent(entityInQueryIndex,entity, scale);
+        //}).ScheduleParallel();
+
         m_EndFixedStepSimECB.AddJobHandleForProducer(Dependency);
 
     }

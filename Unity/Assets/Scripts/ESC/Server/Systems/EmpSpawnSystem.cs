@@ -885,15 +885,17 @@ public partial class EmpSpawnSystem : SystemBase
         //    scale = new NonUniformScale();
 
         //}
-        var scale = new NonUniformScale { Value = new float3(10, 10, 10) };
-        commandBuffer.AddComponent(e, scale);
-        scale.Value = new float3(10, 1, 10);
-        commandBuffer.SetComponent(e, scale);
+
+        ////TODO
+        //var scale = new NonUniformScale { Value = new float3(10, 10, 10) };
+        //commandBuffer.AddComponent(e, scale);
+        //scale.Value = new float3(10, 10, 10);
+        //commandBuffer.SetComponent(e, scale);
 
         //var scale = new Scale { Value = 10 };
         //commandBuffer.AddComponent(e, scale);
         //commandBuffer.SetComponent(e, scale);
-        var pos = new Translation { Value = new float3(offsetX, 0, offsetY) };
+        var pos = new Translation { Value = new float3(offsetX, -0.5f, offsetY) };
         commandBuffer.SetComponent(e, pos);
 
         //commandBuffer.SetComponent(e, new HpComponent { Value = 2 });
