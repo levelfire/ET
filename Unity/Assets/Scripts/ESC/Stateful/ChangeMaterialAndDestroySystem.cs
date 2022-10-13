@@ -1,8 +1,11 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Mathematics;
+using Unity.NetCode;
 using Unity.Physics.Stateful;
 using Unity.Rendering;
+using Unity.Transforms;
 using UnityEngine;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
@@ -70,6 +73,19 @@ public partial class ChangeMaterialAndDestroySystem : SystemBase
                             else
                             {
                                 commandBuffer.SetComponent(otherEntity, new HpComponent { Value = newhp });
+                                var hasR = EntityManager.HasComponent<BlockRTag>(otherEntity);
+                                if (hasR)
+                                {
+                                    var t = EntityManager.GetComponentData<Translation>(otherEntity);
+                                    var req = commandBuffer.CreateEntity();
+                                    var pos = (ushort)MethHelper.SetPos((int)t.Value.x, (int)t.Value.z);
+                                    commandBuffer.AddComponent(req, new SendClientBlockChangeRpc
+                                    {
+                                        Pos = pos
+                                    });
+                                    Debug.Log($"Rpc Server Send blockChange {pos}");
+                                    commandBuffer.AddComponent(req, new SendRpcCommandRequestComponent());
+                                }
                             }
                         }
                         else

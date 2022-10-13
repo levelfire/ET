@@ -155,6 +155,11 @@
     <Compile Include="Assets\Scripts\ESC\Mixed\Components\PackageData.cs" />
     <Compile Include="Assets\Scripts\ESC\Mixed\Components\DropItemComponent.cs" />
     <Compile Include="Assets\Scripts\ESC\Server\Systems\DropItemAgeSystem.cs" />
+    <Compile Include="Assets\Scripts\ESC\Authoring\BlockRAuthoringComponent.cs" />
+    <Compile Include="Assets\Scripts\ESC\Mixed\Systems\BlockRSpawnSystem.cs" />
+    <Compile Include="Assets\Scripts\ESC\Tags\BlockRTag.cs" />
+    <Compile Include="Assets\Scripts\ESC\Mixed\Commands\SendClientBlockChangeRpc.cs" />
+    <Compile Include="Assets\Scripts\ESC\Client\ClientBlockChangeSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Config\Excel\Json\cs\EmpDataConfig.txt" />
