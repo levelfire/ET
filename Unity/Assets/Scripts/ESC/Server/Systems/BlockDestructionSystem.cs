@@ -47,6 +47,7 @@ public partial class BlockDestructionSystem : SystemBase
                 var pos = new Translation { Value = new float3(trans.Value.x, 0, trans.Value.z) };
                 var e = commandBufferBegin.Instantiate(entityInQueryIndex, Prefab);
                 commandBufferBegin.SetComponent(entityInQueryIndex, e, pos);
+                commandBufferBegin.SetComponent(entityInQueryIndex, e, new DropItemComponent(e.Index,101));
             }
 
             commandBuffer.DestroyEntity(entityInQueryIndex, entity); 

@@ -1,7 +1,10 @@
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.NetCode;
 using Unity.Physics.Stateful;
+using UnityEngine;
 
+[UpdateInWorld(TargetWorld.Server)]
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateAfter(typeof(StatefulTriggerEventBufferSystem))]
 public partial class DropItemTriggerSystem : SystemBase
@@ -32,7 +35,8 @@ public partial class DropItemTriggerSystem : SystemBase
 
         Entities
             .WithAll<DropItemTag>()
-            .ForEach((Entity e, ref DynamicBuffer<StatefulTriggerEvent> triggerEventBuffer) =>
+            .WithNone<DestroyTag>()
+            .ForEach((Entity e,ref DynamicBuffer<StatefulTriggerEvent> triggerEventBuffer,in DropItemComponent drop) =>
             {
                 for (int i = 0; i < triggerEventBuffer.Length; i++)
                 {
@@ -43,9 +47,44 @@ public partial class DropItemTriggerSystem : SystemBase
                     {
                         continue;
                     }
+                    bool pick = false;
+                    DynamicBuffer<PickData> pickList = GetBuffer<PickData>(otherEntity);
+                    DynamicBuffer<PackageData> packageList = GetBuffer<PackageData>(otherEntity);
                     if (triggerEvent.State == StatefulEventState.Enter)
                     {
-                        commandBuffer.AddComponent(e, new DestroyTag { });
+                        Debug.Log($"pick Enter len {pickList.Length} cap {pickList.Capacity}");
+                        Debug.Log($"packageList Enter len {packageList.Length} cap {packageList.Capacity}");
+                        //TODO
+                        if (packageList.Length < packageList.Capacity)
+                        {
+                            packageList.Add(new PackageData() { Uuid = drop.Uuid, ItemId = drop.ItemId });
+                            pick = true;
+                        }
+                        else if(pickList.Length < pickList.Capacity)
+                        {
+                            pickList.Add(new PickData() { Uuid = drop.Uuid, ItemId = drop.ItemId });
+                        }
+                        
+                        if (pick)
+                        {
+                            Debug.Log("pick up");
+                            commandBuffer.AddComponent(e, new DestroyTag { });
+                            return;
+                        }
+                    }
+                    else 
+                    {
+                        Debug.Log("pick Leave");
+                        //TODO use tank stay in client world
+                        for (int j = 0; j < pickList.Length; j++)
+                        {
+                            if (pickList[j].Uuid == drop.Uuid)
+                            {
+                                Debug.Log($"pick remove{j}");
+                                pickList.RemoveAt(j);
+                                break;
+                            }
+                        }
                     }
                 }
             }).Schedule();

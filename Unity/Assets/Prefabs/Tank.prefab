@@ -84,6 +84,8 @@ GameObject:
   - component: {fileID: 4768506395427563112}
   - component: {fileID: 1922173323784705893}
   - component: {fileID: 8034136779875460763}
+  - component: {fileID: 5431801658915608130}
+  - component: {fileID: -5320884580016597951}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Tank
@@ -486,6 +488,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EmpStackCount: 0
+--- !u!114 &5431801658915608130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084661346466681200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41bb8b7561802e4bb9d47960e9fcf26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Values: []
+--- !u!114 &-5320884580016597951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084661346466681200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c54e37db8226f444a0e5c4ff1300eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Values: []
 --- !u!1 &7326985041092098638
 GameObject:
   m_ObjectHideFlags: 0
