@@ -10,6 +10,7 @@ using UnityEngine;
 public partial class ClientBlockChangeSystem : SystemBase
 {
     private BeginSimulationEntityCommandBufferSystem m_BeginSimEcb;
+    private NativeList<ushort> m_PosList;
 
     protected override void OnCreate()
     {
@@ -17,6 +18,13 @@ public partial class ClientBlockChangeSystem : SystemBase
 
         RequireForUpdate(GetEntityQuery(ComponentType.ReadOnly<SendClientBlockChangeRpc>(), ComponentType.ReadOnly<ReceiveRpcCommandRequestComponent>()));
         RequireSingletonForUpdate<GameSettingsComponent>();
+
+        m_PosList = new NativeList<ushort>(16, Allocator.Persistent);
+    }
+
+    protected override void OnDestroy()
+    {
+        m_PosList.Dispose();
     }
 
     protected override void OnUpdate()
@@ -28,45 +36,43 @@ public partial class ClientBlockChangeSystem : SystemBase
         var gameSettingsEntity = GetSingletonEntity<GameSettingsComponent>();
         var getGameSettingsComponentData = GetComponentDataFromEntity<GameSettingsComponent>();
 
-        NativeList<ushort> posList = new NativeList<ushort>();
-
-        //var posHandle = Entities
-        //.ForEach((Entity entity, in SendClientBlockChangeRpc request, in ReceiveRpcCommandRequestComponent requestSource) =>
-        //{
-        //    commandBuffer.DestroyEntity(entity);
-
-        //    if (!rpcFromEntity.HasComponent(requestSource.SourceConnection))
-        //        return;
-        //    Debug.Log($"Rpc Client Recv blockChange{request.Pos}");
-        //    posList.Add(request.Pos);
-        //}).Schedule(Dependency);
-
+        m_PosList.Clear();
+        var posList = m_PosList;
         var posHandle = Entities
             .ForEach((Entity entity, in SendClientBlockChangeRpc request, in ReceiveRpcCommandRequestComponent requestSource) =>
             {
+                if (posList.Length >= posList.Capacity)
+                    return;
+
                 commandBuffer.DestroyEntity(entity);
 
                 if (!rpcFromEntity.HasComponent(requestSource.SourceConnection))
                     return;
-                Debug.Log($"Rpc Client Recv blockChange{request.Pos}");
+
+                Debug.Log($"Rpc Client Recv block Change {request.Pos}");
                 posList.Add(request.Pos);
             }).Schedule(Dependency);
 
-        Dependency = Entities
-            .WithReadOnly(posList)
-            .WithAll<BlockRTag>()
-            .ForEach((Entity entity, int entityInQueryIndex, in Translation trans) =>
-            {
-                for (int i = 0; i < posList.Length; ++i)
-                {
-                    if (MethHelper.SetPos((int)trans.Value.x, (int)trans.Value.z) == posList[i])
-                    {
-                        Debug.Log($"Rpc find blockChange{posList[i]}");
-                        return;
-                    }
-                }
+        posHandle.Complete();
 
-            }).Schedule(posHandle);
+        if (posList.Length > 0)
+        {
+            Entities
+                .WithReadOnly(posList)
+                .WithAll<BlockRTag>()
+                .ForEach((Entity entity, int entityInQueryIndex, in Translation trans) =>
+                {
+                    for (int i = 0; i < posList.Length; ++i)
+                    {
+                        if (MethHelper.SetPos((int)trans.Value.x, (int)trans.Value.z) == posList[i])
+                        {
+                            Debug.Log($"Rpc find block Change {posList[i]}");
+                            commandBuffer.SetComponent(entity, new HpComponent { Value = 1 });
+                            continue;
+                        }
+                    }
+                }).Schedule();
+        }
 
         m_BeginSimEcb.AddJobHandleForProducer(Dependency);
     }

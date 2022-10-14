@@ -74,8 +74,11 @@ public partial class TankSpawnSystem : SystemBase
 
             commandBuffer.SetComponent(player, pos);
             commandBuffer.SetComponent(player, rot);
+            
             commandBuffer.SetComponent(player, new GhostOwnerComponent { NetworkId = networkIdFromEntity[requestSource.SourceConnection].Value });
             commandBuffer.SetComponent(player, new TankEntityComponent { TankEntity = requestSource.SourceConnection });
+            //TODO
+            commandBuffer.SetComponent(player, new TankTeamComponent { TeamId = networkIdFromEntity[requestSource.SourceConnection].Value });
 
             commandBuffer.AddComponent(player, new TankSpawnInProgressTag());
 

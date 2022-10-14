@@ -8,6 +8,7 @@ using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateInWorld(TargetWorld.Server)]
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateAfter(typeof(StatefulTriggerEventBufferSystem))]
 public partial class ChangeMaterialAndDestroySystem : SystemBase
@@ -73,25 +74,29 @@ public partial class ChangeMaterialAndDestroySystem : SystemBase
                             else
                             {
                                 commandBuffer.SetComponent(otherEntity, new HpComponent { Value = newhp });
-                                var hasR = EntityManager.HasComponent<BlockRTag>(otherEntity);
-                                if (hasR)
+                            }
+                            var hasR = EntityManager.HasComponent<BlockRTag>(otherEntity);
+                            if (hasR)
+                            {
+                                var t = EntityManager.GetComponentData<Translation>(otherEntity);
+                                var req = commandBuffer.CreateEntity();
+                                var pos = (ushort)MethHelper.SetPos((int)t.Value.x, (int)t.Value.z);
+                                if (newhp <= 0)
                                 {
-                                    var t = EntityManager.GetComponentData<Translation>(otherEntity);
-                                    var req = commandBuffer.CreateEntity();
-                                    var pos = (ushort)MethHelper.SetPos((int)t.Value.x, (int)t.Value.z);
-                                    commandBuffer.AddComponent(req, new SendClientBlockChangeRpc
-                                    {
-                                        Pos = pos
-                                    });
-                                    Debug.Log($"Rpc Server Send blockChange {pos}");
-                                    commandBuffer.AddComponent(req, new SendRpcCommandRequestComponent());
-                                    commandBuffer.AddComponent(otherEntity, new DestroyTag { });
+                                    commandBuffer.AddComponent(req, new SendClientBlockDestroyRpc{Pos = pos});
+                                    Debug.Log($"Rpc Server Send blockDestroy {pos} e {e.Index}");
                                 }
+                                else 
+                                {
+                                    commandBuffer.AddComponent(req, new SendClientBlockChangeRpc{Pos = pos});
+                                    Debug.Log($"Rpc Server Send blockChange {pos} e {e.Index}");
+                                }
+                                commandBuffer.AddComponent(req, new SendRpcCommandRequestComponent());
                             }
                         }
                         else
                         {
-                            commandBuffer.AddComponent(otherEntity, new DestroyTag { });
+                            //commandBuffer.AddComponent(otherEntity, new DestroyTag { });
                         }
                     }
                     else
