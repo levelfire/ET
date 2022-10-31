@@ -23,18 +23,18 @@ namespace ET.Client
 		
 		public static void OnLogin(this UILoginComponent self)
 		{
-			
+
 			//LoginHelper.Login(
-			//	self.DomainScene(), 
-			//	self.account.GetComponent<InputField>().text, 
+			//	self.DomainScene(),
+			//	self.account.GetComponent<InputField>().text,
 			//	self.password.GetComponent<InputField>().text).Coroutine();
 
 			LoginHelper.LoginAccount(
-                self.DomainScene(),
+						 self.DomainScene(),
 				"127.0.0.1:10005",
-                self.account.GetComponent<InputField>().text,
-                self.password.GetComponent<InputField>().text).Coroutine();
+						 self.account.GetComponent<InputField>().text,
+						 self.password.GetComponent<InputField>().text).Coroutine();
 
-        }
+		}
 	}
 }

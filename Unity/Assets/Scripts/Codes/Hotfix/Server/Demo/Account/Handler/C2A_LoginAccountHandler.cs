@@ -114,6 +114,9 @@ namespace ET.Server
                     //session.DomainScene().GetComponent<MatchingComponent>().AddAccount(account.Id, session.InstanceId);
                     session.AddComponent<AccountCheckOutTimeComponent, long>(account.Id);
 
+                    ////TODO?
+                    //session.AddComponent<MailBoxComponent, MailboxType>(MailboxType.GateSession);
+
                     string Token = TimeHelper.ServerNow().ToString()
                         //+ RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
                         + RandomGenerator.RandUInt32().ToString();

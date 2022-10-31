@@ -65,6 +65,14 @@ namespace ET.Client
                     clientScene.AddComponent<NetClientComponent, AddressFamily>(routerAddressComponent.RouterManagerIPAddress.AddressFamily);
                 }
 
+                //IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress(account);
+
+                //R2C_Login r2CLogin;
+                //using (Session session = await RouterHelper.CreateRouterSession(clientScene, realmAddress))
+                //{
+                //    r2CLogin = (R2C_Login)await session.Call(new C2R_Login() { Account = account, Password = password });
+                //}
+
                 IPAddress ipAddress = IPAddress.Parse(ConstValue.RouterHttpHost);
                 var address1 =  new IPEndPoint(ipAddress, 10005);
                 //accountSession = clientScene.GetComponent<NetClientComponent>().Create(NetworkHelper.ToIPEndPoint(address));
@@ -86,8 +94,9 @@ namespace ET.Client
                 return a2C_LoginAccount.Error;
             }
 
-            clientScene.AddComponent<SessionComponent>();
-            clientScene.GetComponent<SessionComponent>().Session = accountSession;
+            //clientScene.AddComponent<SessionComponent>();
+            //clientScene.GetComponent<SessionComponent>().Session = accountSession;
+            clientScene.AddComponent<SessionComponent>().Session = accountSession;
             //clientScene.GetComponent<SessionComponent>().Session.AddComponent<PingComponent>();
 
             clientScene.GetComponent<AccountInfoComponent>().Token = a2C_LoginAccount.Token;
