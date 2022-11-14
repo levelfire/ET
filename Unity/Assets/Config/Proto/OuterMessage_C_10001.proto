@@ -277,4 +277,5 @@ message A2C_MatchingResult // IMessage
 	int32 Error = 1;
 	string Ip = 2;
 	int32 Port = 3;	
+	repeated int32 Maps = 4;
 }

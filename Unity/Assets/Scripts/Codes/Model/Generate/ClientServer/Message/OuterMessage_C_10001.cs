@@ -563,6 +563,9 @@ namespace ET
 		[ProtoMember(3)]
 		public int Port { get; set; }
 
+		[ProtoMember(4)]
+		public List<int> Maps { get; set; }
+
 	}
 
 	public static class OuterMessage

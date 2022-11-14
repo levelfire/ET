@@ -1,5 +1,6 @@
 ﻿using ET.Server;
 using System;
+using System.Collections.Generic;
 
 namespace ET
 {
@@ -49,7 +50,22 @@ namespace ET
             exep.StartInfo.FileName = @"..\..\Builds\DSWorld\Battle\ET.exe";
             var ip = Ip;
             var port = curPort;
-            exep.StartInfo.Arguments = $"ServerBattle {ip} {port}";
+
+            //TODO Random MapModel
+            var maps = new List<int>();
+            var mapsStr = string.Empty;
+            
+            for (int i = 0; i < 8 * 8; i++)
+            {
+                var e = RandomGenerator.RandomNumber(1, 10);
+                maps.Add(e);
+                var appendstr = string.IsNullOrEmpty(mapsStr) ? e.ToString() : "," + e.ToString();
+                mapsStr += appendstr;
+            }
+
+            Log.Debug($"ServerBattle {mapsStr}");
+
+            exep.StartInfo.Arguments = $"ServerBattle {ip} {port} {mapsStr}";
             exep.EnableRaisingEvents = true;
             exep.Exited += new System.EventHandler(exep_Exited);
             exep.Start();
@@ -58,14 +74,20 @@ namespace ET
                 Log.Debug("Battle complete");
             }
 
-            SendResult(sessionId, ip, port);
+            SendResult(sessionId, ip, port, maps);
             await ETTask.CompletedTask;
         }
 
-        public static void SendResult(long sesionInstanceId,string ip, int port)
+        public static void SendResult(long sesionInstanceId,string ip, int port,List<int> maps)
         {
             Session otherSession = EventSystem.Instance.Get(sesionInstanceId) as Session;
-            otherSession?.Send(new A2C_MatchingResult { Error = 0,Ip= ip, Port = port });
+            var result = new A2C_MatchingResult { Error = 0, Ip = ip, Port = port };
+            result.Maps = maps;
+            //foreach (var e in maps)
+            //{
+            //    result.Maps.Add(e);
+            //}
+            otherSession?.Send(result);
         }
     }
 
