@@ -20,6 +20,7 @@ namespace ET.Client
             {
                 if (self.InstanceId != instanceId)
                 {
+                    Log.Info($"RouterCheckComponentAwakeSystem 1");
                     return;
                 }
 
@@ -27,6 +28,7 @@ namespace ET.Client
                 
                 if (self.InstanceId != instanceId)
                 {
+                    Log.Info($"RouterCheckComponentAwakeSystem 2");
                     return;
                 }
 
@@ -34,6 +36,7 @@ namespace ET.Client
 
                 if (time - session.LastRecvTime < 7 * 1000)
                 {
+                    Log.Info($"RouterCheckComponentAwakeSystem 3");
                     continue;
                 }
                 
