@@ -26,10 +26,22 @@ namespace ET
                 self.Ts += 5;
                 Log.Debug($"Matching TryDequeue {self.Ts}");
                 bool match = false;
-                while (self.matchingUnits.TryDequeue(out var unit))
+                var maps = new List<int>();
+                string mapsStr = string.Empty;
+                for (int i = 0; i < 8 * 8; i++)
                 {
+                    var e = RandomGenerator.RandomNumber(1, 10);
+                    maps.Add(e);
+                    var appendstr = string.IsNullOrEmpty(mapsStr) ? e.ToString() : "," + e.ToString();
+                    mapsStr += appendstr;
+                }
+                int count = 0;
+                while (count < 64 && self.matchingUnits.TryDequeue(out var unit))
+                {
+                    count++;
+                    
                     Log.Debug($"Matching unit{unit}");
-                    StartBattle(unit.Item2, self.Port,self.Ip).Coroutine();
+                    StartBattle(unit.Item2, self.Port,self.Ip,maps,mapsStr).Coroutine();
                     match = true;
                 }
                 if (match)
@@ -43,7 +55,7 @@ namespace ET
             }
         }
 
-        private async ETTask StartBattle(long sessionId,int curPort,string Ip)
+        private async ETTask StartBattle(long sessionId,int curPort,string Ip,List<int> maps,string mapsStr)
         {
             Log.Debug($"Battle Start");
             System.Diagnostics.Process exep = new System.Diagnostics.Process();
@@ -51,17 +63,17 @@ namespace ET
             var ip = Ip;
             var port = curPort;
 
-            //TODO Random MapModel
-            var maps = new List<int>();
-            var mapsStr = string.Empty;
-            
-            for (int i = 0; i < 8 * 8; i++)
-            {
-                var e = RandomGenerator.RandomNumber(1, 10);
-                maps.Add(e);
-                var appendstr = string.IsNullOrEmpty(mapsStr) ? e.ToString() : "," + e.ToString();
-                mapsStr += appendstr;
-            }
+            ////TODO Random MapModel
+            //var maps = new List<int>();
+            //var mapsStr = string.Empty;
+
+            //for (int i = 0; i < 8 * 8; i++)
+            //{
+            //    var e = RandomGenerator.RandomNumber(1, 10);
+            //    maps.Add(e);
+            //    var appendstr = string.IsNullOrEmpty(mapsStr) ? e.ToString() : "," + e.ToString();
+            //    mapsStr += appendstr;
+            //}
 
             Log.Debug($"ServerBattle {mapsStr}");
 
